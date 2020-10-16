@@ -1,4 +1,4 @@
-package cn.cxy.slidemenudemo
+package cn.cxy.slidemenu
 
 import android.content.Context
 import android.graphics.Point
@@ -15,10 +15,6 @@ import android.widget.LinearLayout
  */
 class SlideLayout(context: Context?, attrs: AttributeSet? = null) :
     HorizontalScrollView(context, attrs) {
-    /**
-     * 屏幕宽度
-     */
-    private val mScreenWidth: Int
     private lateinit var mLeftMenu: ViewGroup
     private lateinit var mRightMenu: ViewGroup
     private var mOnMenuSelected: OnMenuSelect? = null
@@ -39,10 +35,6 @@ class SlideLayout(context: Context?, attrs: AttributeSet? = null) :
     private var mShowMenuRatio = 0.5
     private var hasMeasured = false
 
-    init {
-        mScreenWidth = getScreenWidth()
-    }
-
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         /**
          * 显式设置中间内容区域宽度
@@ -50,7 +42,7 @@ class SlideLayout(context: Context?, attrs: AttributeSet? = null) :
         if (!hasMeasured) {
             val wrapper = getChildAt(0) as LinearLayout
             val content = wrapper.getChildAt(1) as ViewGroup
-            content.layoutParams.width = mScreenWidth
+            content.layoutParams.width = getScreenWidth()
         }
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
     }

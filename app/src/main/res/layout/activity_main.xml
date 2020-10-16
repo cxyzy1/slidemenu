@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:gravity="center">
 
-    <cn.cxy.slidemenudemo.SlideLayout
+    <cn.cxy.slidemenu.SlideLayout
         android:id="@+id/slideLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -36,5 +36,5 @@
 
         </LinearLayout>
 
-    </cn.cxy.slidemenudemo.SlideLayout>
+    </cn.cxy.slidemenu.SlideLayout>
 </LinearLayout>
