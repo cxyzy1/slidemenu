@@ -19,10 +19,9 @@ class SlideLayout(context: Context?, attrs: AttributeSet? = null) :
      * 屏幕宽度
      */
     private val mScreenWidth: Int
-
-    init {
-        mScreenWidth = getScreenWidth()
-    }
+    private lateinit var mLeftMenu: ViewGroup
+    private lateinit var mRightMenu: ViewGroup
+    private var mOnMenuSelected: OnMenuSelect? = null
 
     /**
      * 左侧菜单宽度
@@ -39,6 +38,11 @@ class SlideLayout(context: Context?, attrs: AttributeSet? = null) :
      */
     private var mShowMenuRatio = 0.5
     private var hasMeasured = false
+
+    init {
+        mScreenWidth = getScreenWidth()
+    }
+
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         /**
          * 显式设置中间内容区域宽度
@@ -55,13 +59,13 @@ class SlideLayout(context: Context?, attrs: AttributeSet? = null) :
         super.onLayout(changed, l, t, r, b)
         if (changed) {
             val wrapper = getChildAt(0) as LinearLayout
-            val leftMenu = wrapper.getChildAt(0) as ViewGroup
-            val rightMenu = wrapper.getChildAt(2) as ViewGroup
-            mLeftMenuWidth = leftMenu.width
-            mRightMenuWidth = rightMenu.width
+            mLeftMenu = wrapper.getChildAt(0) as ViewGroup
+            mRightMenu = wrapper.getChildAt(2) as ViewGroup
+            mLeftMenuWidth = mLeftMenu.width
+            mRightMenuWidth = mRightMenu.width
             hasMeasured = true
             //隐藏菜单，显示主体内容
-            scrollTo(leftMenu.width, 0)
+            scrollTo(mLeftMenu.width, 0)
         }
     }
 
@@ -75,9 +79,11 @@ class SlideLayout(context: Context?, attrs: AttributeSet? = null) :
                 val scrollX = scrollX
                 if (scrollX > mLeftMenuWidth + mRightMenuWidth * mShowMenuRatio) {
                     smoothScrollTo(mLeftMenuWidth + mRightMenuWidth, 0)
+                    mOnMenuSelected?.onSelected(mRightMenu)
                 } else if (scrollX > mLeftMenuWidth * mShowMenuRatio) {
                     smoothScrollTo(mLeftMenuWidth, 0)
                 } else {
+                    mOnMenuSelected?.onSelected(mLeftMenu)
                     smoothScrollTo(0, 0)
                 }
                 return true
@@ -96,4 +102,12 @@ class SlideLayout(context: Context?, attrs: AttributeSet? = null) :
         }
         return point.x
     }
+
+    fun setCallback(onMenuSelect: OnMenuSelect) {
+        mOnMenuSelected = onMenuSelect
+    }
+}
+
+interface OnMenuSelect {
+    fun onSelected(view: ViewGroup)
 }
