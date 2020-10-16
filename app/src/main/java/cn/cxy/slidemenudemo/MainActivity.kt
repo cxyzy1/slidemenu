@@ -1,4 +1,4 @@
-package cn.cxy.slidemenu
+package cn.cxy.slidemenudemo
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

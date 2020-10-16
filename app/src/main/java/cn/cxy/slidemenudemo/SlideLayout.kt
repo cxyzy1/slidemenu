@@ -1,4 +1,4 @@
-package cn.cxy.slidemenu
+package cn.cxy.slidemenudemo
 
 import android.content.Context
 import android.graphics.Point
