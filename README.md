@@ -1,5 +1,5 @@
 # 效果图
-![](https://upload-images.jianshu.io/upload_images/6169789-b7d51813621fa9e0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![](https://upload-images.jianshu.io/upload_images/6169789-b7d51813621fa9e0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/500)
 # 特性
 支持左滑和右滑显示一个菜单项,尚不支持更灵活的方式.
 # 主要代码
